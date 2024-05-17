@@ -23,7 +23,7 @@ class MotorDriver:
 if __name__ == "__main__":
     from time import sleep
     # m = MotorDriver(16, 17)  # left
-    m = MotorDriver(14, 15)  # left
+    m = MotorDriver(14, 15)  # right
     for dc in range(0, 65536, 64):
         m.forward(dc)
         print(f"forward: {dc}")
