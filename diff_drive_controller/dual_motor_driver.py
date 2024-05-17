@@ -2,6 +2,10 @@ from machine import Pin, PWM
 from motor_driver import MotorDriver
 
 class DualMotorDriver:
+    """
+    A combination of 2 MotorDriver objects. 
+    Simplest differential drive robot motion regulation using PWM signals.
+    """
     def __init__(self, left_pins: tuple, right_pins: tuple) -> None:
         self.left_motor = MotorDriver(*left_pins)
         self.right_motor = MotorDriver(*right_pins)
