@@ -10,13 +10,13 @@ class EncodedMotorDriver(MotorDriver):
     ) -> None:
         super().__init__(dir_pin_id, pwm_pin_id)
         self.ENCA_PIN = Pin(enca_pin_id, Pin.IN, Pin.PULL_DOWN)
-        self.ENCA_PIN.irq(trigger=Pin.IRQ_RISING, handler=self.increment_counter)
+        self.ENCA_PIN.irq(trigger=Pin.IRQ_RISING, handler=self.inc_enca_counts)
         # self.ENCB_PIN = Pin(encb_pin_id, Pin.IN, Pin.PULL_DOWN)
         # Variables
-        self.enc_counter = 0
+        self.enca_counts = 0
 
-    def increment_counter(self, pin):
-        self.enc_counter += 1
+    def inc_enca_counts(self, pin):
+        self.enca_counts += 1
 
     
 if __name__ == "__main__":
@@ -25,19 +25,19 @@ if __name__ == "__main__":
     m = EncodedMotorDriver(14, 15, 12)  # right
     for dc in range(0, 65536, 64):
         m.forward(dc)
-        print(f"forward: {m.enc_counter}")
+        print(f"f- dutycycle: {dc}, enca counts: {m.enca_counts}")
         sleep(0.01)
     for dc in reversed(range(0, 65536, 64)):
         m.forward(dc)
-        print(f"forward: {m.enc_counter}")
+        print(f"f- dutycycle: {dc}, enca counts: {m.enca_counts}")
         sleep(0.01)
     for dc in range(0, 65536, 64):
         m.backward(dc)
-        print(f"backward: {m.enc_counter}")
+        print(f"b- dutycycle: {dc}, enca counts: {m.enca_counts}")
         sleep(0.01)
     for dc in reversed(range(0, 65536, 64)):
         m.backward(dc)
-        print(f"backward: {m.enc_counter}")
+        print(f"b- dutycycle: {dc}, enca counts: {m.enca_counts}")
         sleep(0.01)
     print("STOP!")
     m.stop()
