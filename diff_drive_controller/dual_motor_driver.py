@@ -29,10 +29,7 @@ class DualMotorDriver:
     def stop(self):
         self.left_motor.stop()
         self.right_motor.stop()
-    
-    def halt(self):
-        self.left_motor.halt()
-        self.right_motor.halt()
+
 
 if __name__ == "__main__":
     from time import sleep
@@ -52,6 +49,23 @@ if __name__ == "__main__":
     for dc in reversed(range(0, 65536, 64)):
         dm.backward(dc)
         print(f"backward: {dc}")
+        sleep(0.01)
+    print("STOP!")
+    for dc in range(0, 65536, 64):
+        dm.spin_ccw(dc)
+        print(f"spin counter-clockwise: {dc}")
+        sleep(0.01)
+    for dc in reversed(range(0, 65536, 64)):
+        dm.spin_ccw(dc)
+        print(f"spin counter-clockwise: {dc}")
+        sleep(0.01)
+    for dc in range(0, 65536, 64):
+        dm.spin_cw(dc)
+        print(f"spin clockwise: {dc}")
+        sleep(0.01)
+    for dc in reversed(range(0, 65536, 64)):
+        dm.spin_cw(dc)
+        print(f"spin clockwise: {dc}")
         sleep(0.01)
     print("STOP!")
     dm.stop()

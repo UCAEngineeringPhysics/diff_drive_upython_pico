@@ -19,9 +19,6 @@ class MotorDriver:
     def stop(self):
         self.PWM_PIN.duty_u16(0)
     
-    def halt(self):
-        self.PWM_PIN.duty_u16(0)
-        self.PWM_PIN.deinit()
 
 if __name__ == "__main__":
     from time import sleep
